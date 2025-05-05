@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gsap practice</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
+
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
+  </head>
+  <body class="bg-[#1c1d20] flex flex-col justify-center items-center h-screen">
+    <div
+      id="box1"
+      class="boxes h-[100px] w-[100px] bg-blue-500 rounded-3xl m-[10px]"
+    ></div>
+    <div
+      id="box2"
+      class="boxes h-[100px] w-[100px] bg-green-500 rounded-3xl m-[10px]"
+    ></div>
+    <div
+      id="box3"
+      class="boxes h-[100px] w-[100px] bg-pink-500 rounded-3xl m-[10px]"
+    ></div>
+    <button
+      onclick="animate"
+      id="button"
+      class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px]"
+    >
+      Animate
+    </button>
+    <script>
+      const box1 = document.getElementById("box1");
+      const box2 = document.getElementById("box2");
+      const box3 = document.getElementById("box3");
+      const boxes = document.querySelectorAll(".boxes");
+
+      gsap.registerEffect({
+        name: "fadeOut",
+        effect: (targets, config) => {
+          return gsap.to(targets, { opacity: 0, duration: config.duration });
+        },
+        defaults: { duration: 1 },
+        extendTimeline: true,
+      });
+
+      const button = document.getElementById("button");
+      button.addEventListener("click", () => {
+        const tl = gsap.timeline();
+        tl.to(box1, { x: 200, duration: 1 })
+          .to(box2, { rotation: 360, duration: 1 })
+          .to(box3, { x: -200, rotation: -360, duration: 1 })
+          .fadeOut(boxes);
+      });
+    </script>
+  </body>
+</html>
