@@ -15,27 +15,16 @@
     </style>
   </head>
   <body class="bg-[#1c1d20] flex flex-col justify-center items-center h-screen">
-    <div
-      id="box1"
-      class="boxes h-[100px] w-[100px] bg-blue-500 rounded-3xl m-[10px]"
-    ></div>
-    <div
-      id="box2"
-      class="boxes h-[100px] w-[100px] bg-green-500 rounded-3xl m-[10px]"
-    ></div>
-    <div
-      id="box3"
-      class="boxes h-[100px] w-[100px] bg-pink-500 rounded-3xl m-[10px]"
-    ></div>
-    <button
-      onclick="animate"
-      id="button"
-      class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px]"
-    >
-      Animate
-    </button>
 
-    <!-- This is the main part  -->
+    <!-- Boxes  -->
+    <div id="box1" class="boxes h-[100px] w-[100px] bg-blue-500 rounded-3xl m-[10px]"></div>
+    <div id="box2" class="boxes h-[100px] w-[100px] bg-green-500 rounded-3xl m-[10px]"></div>
+    <div id="box3" class="boxes h-[100px] w-[100px] bg-pink-500 rounded-3xl m-[10px]"></div>
+
+    <!-- Button -->
+    <button onclick="animate" id="button" class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px]">Animate</button>
+
+    <!-- Script Section -->
     <script>
       const box1 = document.getElementById("box1");
       const box2 = document.getElementById("box2");
