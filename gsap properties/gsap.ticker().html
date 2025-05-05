@@ -2,17 +2,79 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>GSAP Ticker Full Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      * {
+        font-family: "Poppins", sans-serif;
+      }
+    </style>
   </head>
-  <body>
-    <script>
-     gsap.ticker.add(trackFrame);
+  <body class="bg-[#1c1d20] text-white flex flex-col items-center justify-center min-h-screen">
+    <!-- Box -->
+    <div id="box1" class="h-[100px] w-[100px] bg-blue-500 rounded-2xl m-4"></div>
 
-function trackFrame(frame) {
-//   console.log("Current frame number: " + frame);
-// }
+    <!-- Live stats display -->
+    <div class="text-center mt-4">
+      <p id="timeText">Time: </p>
+      <p id="deltaText">Delta: </p>
+      <p id="frameText">Frame: </p>
+      <p id="deltaRatioText">DeltaRatio: </p>
+    </div>
+
+    <!-- Control buttons -->
+    <div class="flex flex-wrap justify-center mt-6">
+      <button id="playBtn" class="bg-green-500 px-4 py-2 rounded m-2">Play</button>
+      <button id="pauseBtn" class="bg-red-500 px-4 py-2 rounded m-2">Pause</button>
+      <button id="fpsBtn" class="bg-yellow-500 px-4 py-2 rounded m-2">Set FPS to 30</button>
+      <button id="lagBtn" class="bg-purple-500 px-4 py-2 rounded m-2">Set Lag Smoothing</button>
+    </div>
+
+    <script>
+      // Start with global timeline paused
+      gsap.globalTimeline.pause();
+      gsap.to("#box1", { x: 300, duration: 4 });
+
+      // Live ticker stats
+      gsap.ticker.add((time, deltaTime, frame) => {
+        document.getElementById("timeText").innerText = `Time: ${time.toFixed(2)} sec`;
+        document.getElementById("deltaText").innerText = `Delta: ${deltaTime.toFixed(2)} ms`;
+        document.getElementById("frameText").innerText = `Frame: ${frame}`;
+        document.getElementById("deltaRatioText").innerText = `DeltaRatio: ${gsap.ticker.deltaRatio(60).toFixed(2)}`;
+      });
+
+      // Move box using deltaRatio to keep speed consistent across frame rates
+      gsap.ticker.add(() => {
+        const move = 1 * gsap.ticker.deltaRatio(60); // smooth consistent movement
+        gsap.set("#box1", { x: `+=${move}` });
+      });
+
+      // Run only once, with priority (runs before GSAP's core logic)
+      function runOnce() {
+        console.log("This function runs only once and before all others.");
+      }
+      gsap.ticker.add(runOnce, true, true);
+
+      // FPS throttle example
+      document.getElementById("fpsBtn").addEventListener("click", () => {
+        gsap.ticker.fps(30);
+        console.log("Ticker FPS set to 30");
+      });
+
+      // Lag smoothing example
+      document.getElementById("lagBtn").addEventListener("click", () => {
+        gsap.ticker.lagSmoothing(1000, 16); // only compensate when 1s lag occurs
+        console.log("Lag smoothing configured");
+      });
+
+      // Play and pause global timeline
+      document.getElementById("playBtn").addEventListener("click", () => {
+        gsap.globalTimeline.play();
+      });
+      document.getElementById("pauseBtn").addEventListener("click", () => {
+        gsap.globalTimeline.pause();
+      });
     </script>
   </body>
 </html>
