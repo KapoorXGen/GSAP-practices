@@ -27,37 +27,50 @@
       id="box3"
       class="boxes h-[100px] w-[100px] bg-pink-500 rounded-3xl m-[10px]"
     ></div>
-    <button
-      onclick="animate"
-      id="button"
-      class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px]"
-    >
-      Animate
-    </button>
+    <div class="buttons flex flex-row">
+      <button
+        onclick="animate"
+        id="button"
+        class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]"
+      >
+        Play
+      </button>
+      <button
+        onclick="animate"
+        id="button"
+        class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]"
+      >
+        Pause
+      </button>
+      <button
+        onclick="animate"
+        id="button"
+        class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]"
+      >
+        Paused
+      </button>
+      <button
+        onclick="animate"
+        id="button"
+        class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]"
+      >
+        TimeScale
+      </button>
+    </div>
 
     <!-- This is the main part  -->
     <script>
-      const box1 = document.getElementById("box1");
-      const box2 = document.getElementById("box2");
-      const box3 = document.getElementById("box3");
-      const boxes = document.querySelectorAll(".boxes");
-
-      gsap.registerEffect({
-        name: "fadeOut",
-        effect: (targets, config) => {
-          return gsap.to(targets, { opacity: 0, duration: config.duration });
-        },
-        defaults: { duration: 1 },
-        extendTimeline: true,
-      });
-
       const button = document.getElementById("button");
+
       button.addEventListener("click", () => {
+        //Creating tween
+        gsap.to(".boxes", { rotation: 360, duration: 3 });
+
+        //Creating timeline
         const tl = gsap.timeline();
-        tl.to(box1, { x: 200, duration: 1 })
-          .to(box2, { rotation: 360, duration: 1 })
-          .to(box3, { x: -200, rotation: -360, duration: 1 })
-          .fadeOut(boxes);
+        tl.to("#box1", { x: 140, duration: 2 })
+          .to("#box2", { x: -140, duration: 2 })
+          .to("#box3", { y: -240, duration: 2 });
       });
     </script>
   </body>
