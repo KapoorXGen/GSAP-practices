@@ -3,74 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gsap practice</title>
+    <title>GSAP Global Timeline</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap");
-
       * {
         font-family: "Poppins", sans-serif;
       }
     </style>
   </head>
   <body class="bg-[#1c1d20] flex flex-col justify-center items-center h-screen">
-    <div
-      id="box1"
-      class="boxes h-[100px] w-[100px] bg-blue-500 rounded-3xl m-[10px]"
-    ></div>
-    <div
-      id="box2"
-      class="boxes h-[100px] w-[100px] bg-green-500 rounded-3xl m-[10px]"
-    ></div>
-    <div
-      id="box3"
-      class="boxes h-[100px] w-[100px] bg-pink-500 rounded-3xl m-[10px]"
-    ></div>
+    <!-- Boxes -->
+    <div id="box1" class="boxes h-[100px] w-[100px] bg-blue-500 rounded-3xl m-[10px]"></div>
+    <div id="box2" class="boxes h-[100px] w-[100px] bg-green-500 rounded-3xl m-[10px]"></div>
+    <div id="box3" class="boxes h-[100px] w-[100px] bg-pink-500 rounded-3xl m-[10px]"></div>
+
+    <!-- Buttons -->
     <div class="buttons flex flex-row">
-      <button
-        onclick="animate"
-        id="button"
-        class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]"
-      >
-        Play
-      </button>
-      <button
-        onclick="animate"
-        id="button"
-        class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]"
-      >
-        Pause
-      </button>
-      <button
-        onclick="animate"
-        id="button"
-        class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]"
-      >
-        Paused
-      </button>
-      <button
-        onclick="animate"
-        id="button"
-        class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]"
-      >
-        TimeScale
-      </button>
+      <button id="button-play" class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]">Play</button>
+      <button id="button-pause" class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]">Pause</button>
+      <button id="button-paused" class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]">Paused?</button>
+      <button id="button-timeScale" class="h-[40px] mt-[20px] w-[100px] rounded-2xl bg-white p-[5px] m-[10px]">TimeScale</button>
     </div>
 
-    <!-- This is the main part  -->
+    <!-- Script Section -->
     <script>
-      const button = document.getElementById("button");
+      // Pause the global timeline initially
+      gsap.globalTimeline.pause();
 
-      button.addEventListener("click", () => {
-        //Creating tween
-        gsap.to(".boxes", { rotation: 360, duration: 3 });
+      // Add animations directly to the global timeline
+      gsap.to("#box1", { x: 140, duration: 2 });
+      gsap.to("#box2", { x: -140, duration: 2, delay: 2 }); // Starts after box1
+      gsap.to("#box3", { y: -240, duration: 2, delay: 4 }); // Starts after box2
 
-        //Creating timeline
-        const tl = gsap.timeline();
-        tl.to("#box1", { x: 140, duration: 2 })
-          .to("#box2", { x: -140, duration: 2 })
-          .to("#box3", { y: -240, duration: 2 });
+      // Buttons reference
+      const button_play = document.getElementById("button-play");
+      const button_pause = document.getElementById("button-pause");
+      const button_paused = document.getElementById("button-paused");
+      const button_Tscale = document.getElementById("button-timeScale");
+
+      // Play global timeline
+      button_play.addEventListener("click", () => {
+        gsap.globalTimeline.play();
+      });
+
+      // Pause global timeline
+      button_pause.addEventListener("click", () => {
+        gsap.globalTimeline.pause();
+      });
+
+      // Check if paused
+      button_paused.addEventListener("click", () => {
+        console.log("Global timeline paused?", gsap.globalTimeline.paused());
+      });
+
+      // Change speed
+      button_Tscale.addEventListener("click", () => {
+        gsap.globalTimeline.timeScale(2); // 2x speed
       });
     </script>
   </body>
