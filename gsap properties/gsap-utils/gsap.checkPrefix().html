@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP CheckPrefix Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  </head>
+  <body>
+    <!-- Open the console first baby -->
+    <!-- Box Element -->
+    <div id="box" style="width: 100px; height: 100px; background-color: #60a5fa; margin: 50px auto;"></div>
+
+    <script>
+      // GSAP checkPrefix example to ensure the correct vendor prefix
+      const prefix = gsap.utils.checkPrefix("transform");
+
+      console.log("Prefix for transform:", prefix);
+
+      const box = document.getElementById("box");
+
+      // Apply transform using the appropriate prefix
+      gsap.set(box, {
+        [prefix + "transform"]: "rotate(45deg)"
+      });
+    </script>
+
+  </body>
+</html>
