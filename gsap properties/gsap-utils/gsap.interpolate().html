@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Interpolate - Color Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #1c1d20;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+
+    <script>
+      const box = document.querySelector(".box");
+
+      // Interpolate between two colors (red and blue) with 50% transition
+      const color1 = "#FF0000"; // red
+      const color2 = "#0000FF"; // blue
+      const percentage = 0.5; // Midway between red and blue
+
+      const interpolatedColor = gsap.utils.interpolate(
+        color1,
+        color2,
+        percentage
+      ); // This gives us a purple color
+
+      console.log("Interpolated Color: ", interpolatedColor);
+
+      // Animate the box color from red to purple to blue
+      gsap.to(box, {
+        backgroundColor: color2,
+        duration: 2,
+        ease: "power2.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
+    </script>
+  </body>
+</html>
