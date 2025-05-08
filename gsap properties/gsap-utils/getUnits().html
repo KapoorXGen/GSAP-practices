@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Units Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+        background-color: #1c1d20;
+        font-family: sans-serif;
+      }
+      .text {
+        color: white;
+        font-size: 24px;
+        margin-top: 20px;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background: #00bcd4;
+        position: relative;
+        border-radius: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="text">Unit:</div>
+
+    <script>
+      const box = document.querySelector(".box");
+      const text = document.querySelector(".text");
+
+      // Animate to a value with unit
+      const moveTo = "10rem"; //  yaha change karo unit automatically change karega
+
+      // Get the unit using GSAP util
+      const unit = gsap.utils.getUnit(moveTo); // will return "px"
+
+      // Show the unit in text box
+      text.textContent = "Unit: " + unit;
+
+      // Animate box
+      gsap.to(box, {
+        x: moveTo,
+        duration: 2,
+        ease: "power2.inOut",
+        repeat: -1,
+        yoyo: true,
+      });
+    </script>
+  </body>
+</html>
