@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP wrapYoyo Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #00bcd4;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+
+    <script>
+      const box = document.querySelector(".box");
+
+      let xPosition = 0;
+
+      // Wrap and yoyo for smooth looping
+      gsap.to(box, {
+        x: function () {
+          xPosition = gsap.utils.wrap(0, 500, xPosition + 100);
+          return xPosition;
+        },
+        duration: 2,
+        repeat: -1,
+        yoyo: true, // This creates the yoyo effect
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Snap Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #00bcd4;
+        position: absolute;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+
+    <script>
+      const box = document.querySelector(".box");
+
+      // Use snap to restrict the position of the box to multiples of 100px
+      gsap.to(box, {
+        x: 300,
+        duration: 2,
+        snap: { x: 100 }, // Snap to multiples of 100px
+        ease: "power1.inOut", // Optional: to smooth the animation
+      });
+    </script>
+  </body>
+</html>

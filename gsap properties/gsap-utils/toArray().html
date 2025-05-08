@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP toArray Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      .box {
+        width: 50px;
+        height: 50px;
+        background-color: #00bcd4;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <div class="box"></div>
+    <div class="box"></div>
+
+    <script>
+      const boxes = gsap.utils.toArray(".box");
+      boxes.forEach((box, index) => {
+        gsap.to(box, { x: index * 100, duration: 1 });
+      });
+    </script>
+  </body>
+</html>
