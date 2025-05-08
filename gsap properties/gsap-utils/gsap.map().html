@@ -32,8 +32,7 @@
       window.addEventListener("scroll", () => {
         // Get the scroll position (percentage)
         const scrollY = window.scrollY;
-        const maxScroll =
-          document.documentElement.scrollHeight - window.innerHeight;
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
         const progress = scrollY / maxScroll;
 
         // Map the scroll progress (0 to 1) to box width (100px to 500px)
