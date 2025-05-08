@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Selector Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #1c1d20;
+        height: 100vh;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(5, 100px);
+        grid-gap: 10px;
+      }
+      .cell {
+        width: 100px;
+        height: 100px;
+        background-color: #00bcd4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid">
+      <div class="cell">1</div>
+      <div class="cell">2</div>
+      <div class="cell">3</div>
+      <div class="cell">4</div>
+      <div class="cell">5</div>
+      <!-- More cells can be added here -->
+    </div>
+
+    <script>
+      const grid = document.querySelector(".grid");
+
+      // Select all cells within the grid using gsap.utils.toArray
+      const cells = gsap.utils.toArray(".cell");
+
+      // Animate all cells to scale them up
+      gsap.from(cells, { duration: 1, scale: 0, stagger: 0.1 });
+    </script>
+  </body>
+</html>

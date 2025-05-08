@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Random Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #1c1d20;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #00bcd4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+
+    <script>
+      const box = document.querySelector(".box");
+
+      // Change the box position to a random value within 0 to 90vh on scroll
+      window.addEventListener("scroll", () => {
+        const randomPosition = gsap.utils.random(0, 90); // Random value between 0 and 90vh
+
+        // Use GSAP to animate the box to a random position
+        gsap.to(box, { y: randomPosition + "vh", duration: 0.5 });
+      });
+    </script>
+  </body>
+</html>

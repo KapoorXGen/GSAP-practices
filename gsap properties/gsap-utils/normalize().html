@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Normalize Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200vh; /* increased height to make scroll visible */
+        background-color: #1c1d20;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #00bcd4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+
+    <script>
+      const box = document.querySelector(".box");
+
+      window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        const maxScroll =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const normalized = gsap.utils.normalize(0, maxScroll, scrollY); // normalize scroll value
+
+        // Use the normalized value to adjust the box's width (0 to 500px)
+        const boxWidth = normalized * 500; // scale the value
+        box.style.width = `${boxWidth}px`;
+      });
+    </script>
+  </body>
+</html>
