@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GSAP Range - Dynamic Grid Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #1c1d20;
+      height: 100vh;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 100px);
+      grid-gap: 10px;
+    }
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #00bcd4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+
+  <script>
+    const grid = document.querySelector('.grid');
+
+    // Create a dynamic grid with a range (5x5 grid)
+    const gridSize = 5;
+    const gridItems = Array.from({ length: gridSize * gridSize }, (_, index) => index); // 5*5 = 25 cells
+
+    gridItems.forEach((item, index) => {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      cell.textContent = index + 1; // Number the cells
+      grid.appendChild(cell);
+    });
+  </script>
+</body>
+</html>
