@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Map - Scroll Progress Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 200vh; /* To enable scrolling */
+        background-color: #1c1d20;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .box {
+        width: 100px;
+        height: 100px;
+        background-color: #00bcd4;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+
+    <script>
+      const box = document.querySelector(".box");
+
+      // Listen to scroll event and map scroll progress to box width
+      window.addEventListener("scroll", () => {
+        // Get the scroll position (percentage)
+        const scrollY = window.scrollY;
+        const maxScroll =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const progress = scrollY / maxScroll;
+
+        // Map the scroll progress (0 to 1) to box width (100px to 500px)
+        const mappedWidth = gsap.utils.map(0, 1, 100, 500, progress);
+
+        // Apply the mapped width to the box
+        box.style.width = mappedWidth + "px";
+      });
+    </script>
+  </body>
+</html>
